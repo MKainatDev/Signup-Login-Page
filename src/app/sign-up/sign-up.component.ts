@@ -1,12 +1,29 @@
+
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-sign-up',
+  selector: 'app-signup',
   standalone: true,
-  imports: [],
-  templateUrl: './sign-up.component.html',
-  styleUrl: './sign-up.component.css'
+  imports: [FormsModule],
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.css']
 })
-export class SignUpComponent {
+export class SignupComponent {
+  email = '';
+  password = '';
 
+  constructor(private router: Router) {}
+
+  onSignup() {
+    // Save user data in localStorage
+    localStorage.setItem('user', JSON.stringify({
+      email: this.email,
+      password: this.password
+    }));
+
+    alert('Account Created! Please Login.');
+    this.router.navigate(['/login']);
+  }
 }
